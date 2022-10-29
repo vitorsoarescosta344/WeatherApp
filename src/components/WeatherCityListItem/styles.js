@@ -7,5 +7,7 @@ export default StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    borderBottomColor: '#D9D9D9',
+    borderBottomWidth: 1,
   },
 });

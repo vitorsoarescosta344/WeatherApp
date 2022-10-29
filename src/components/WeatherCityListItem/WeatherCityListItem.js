@@ -43,7 +43,9 @@ export default function WeatherCityListItem({item}) {
               textStyles.textMedium,
               {fontSize: 28, color: iconProps.color},
             ]}>
-            {`${'Brasilia'} - ${deserialized.nowTemperature.toFixed(1)}°C`}
+            {`${
+              item.name.split(' ')[0]
+            } - ${deserialized.nowTemperature.toFixed(1)}°C`}
           </Text>
           <View>
             <Icon name={iconProps.icon} color={iconProps.color} size={45} />
