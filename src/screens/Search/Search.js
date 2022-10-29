@@ -1,5 +1,13 @@
 import {useCallback, useEffect, useState} from 'react';
-import {Dimensions, FlatList, ScrollView, TextInput, View} from 'react-native';
+import {
+  Dimensions,
+  FlatList,
+  ScrollView,
+  TextInput,
+  View,
+  TouchableOpacity,
+} from 'react-native';
+import Icon from 'react-native-vector-icons/dist/MaterialCommunityIcons';
 import CountryListItem from '../../components/CountryListItem';
 import WeatherCityListItem from '../../components/WeatherCityListItem';
 import Container from '../../layout/Container';
@@ -10,7 +18,7 @@ import {LocationRealmContext} from '../../models';
 
 const {useQuery, useRealm} = LocationRealmContext;
 
-export default function Search({}) {
+export default function Search({navigation}) {
   const [data, setData] = useState([]);
   const [searchText, setSearchText] = useState('');
 
@@ -52,11 +60,16 @@ export default function Search({}) {
             height: 60,
             padding: 10,
             width: Dimensions.get('screen').width,
+            flexDirection: 'row',
+            alignItems: 'center',
           }}>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Icon name="chevron-left" size={30} color="#FFF" />
+          </TouchableOpacity>
           <TextInput
             style={[
               textStyles.textRegular,
-              {backgroundColor: '#FFF', color: '#2e3440'},
+              {backgroundColor: '#FFF', color: '#2e3440', flex: 1},
             ]}
             onChangeText={text => setSearchText(text)}
             value={searchText}
