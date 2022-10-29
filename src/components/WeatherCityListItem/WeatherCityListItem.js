@@ -5,16 +5,6 @@ import styles from './styles';
 import {containerColors, icons} from '../../utils/weathercode';
 import deserializeResponse from '../../utils/deserializeResponse';
 
-// console.log(
-//   new Date().toLocaleDateString('pt-br', {
-//     hour: 'numeric',
-//     minute: 'numeric',
-//     second: 'numeric',
-//   }),
-// );
-
-//console.log(new Date().getHours());
-
 export default function WeatherCityListItem({item}) {
   const deserialized = deserializeResponse(item);
 
