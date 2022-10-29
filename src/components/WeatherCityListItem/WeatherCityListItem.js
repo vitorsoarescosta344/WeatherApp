@@ -3,6 +3,7 @@ import Icon from 'react-native-vector-icons/dist/MaterialCommunityIcons';
 import textStyles from '../../utils/GlobalStyles/textStyles';
 import styles from './styles';
 import {containerColors, icons} from '../../utils/weathercode';
+import deserializeResponse from '../../utils/deserializeResponse';
 
 // console.log(
 //   new Date().toLocaleDateString('pt-br', {
@@ -12,29 +13,33 @@ import {containerColors, icons} from '../../utils/weathercode';
 //   }),
 // );
 
-console.log(new Date().getHours());
+//console.log(new Date().getHours());
 
-export default function WeatherCityListItem(params) {
+export default function WeatherCityListItem({item}) {
+  const deserialized = deserializeResponse(item);
+
+  const iconProps =
+    icons[`${deserialized.weatherCondition}_${deserialized.dayOrNight}`];
+
+  const color =
+    containerColors[
+      `${deserialized.weatherCondition}_${deserialized.dayOrNight}`
+    ];
+
+  const iconProp = icons['clear_sky_day'];
+
   return (
     <>
-      <View
-        style={[
-          styles.container,
-          {backgroundColor: containerColors.overcast_night},
-        ]}>
+      <View style={[styles.container, {backgroundColor: color}]}>
         <Text
           style={[
             textStyles.textMedium,
-            {fontSize: 28, color: icons.overcast_night.color},
+            {fontSize: 28, color: iconProps.color},
           ]}>
-          {`${'Brasilia'} - ${21}°C`}
+          {`${'Brasilia'} - ${deserialized.nowTemperature.toFixed(1)}°C`}
         </Text>
         <View>
-          <Icon
-            name={icons.overcast_night.icon}
-            color={icons.overcast_night.color}
-            size={45}
-          />
+          <Icon name={iconProps.icon} color={iconProps.color} size={45} />
         </View>
       </View>
     </>

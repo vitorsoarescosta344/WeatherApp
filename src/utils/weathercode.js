@@ -33,4 +33,20 @@ export const icons = {
     color: '#e9ecef',
     icon: 'weather-pouring',
   },
+  snowy_day: {
+    color: '#FFF',
+    icon: 'weather-snowy',
+  },
+  snowy_rainy_day: {
+    color: '#FFF',
+    icon: 'weather-snowy-rainy',
+  },
+  snowy_night: {
+    color: '#FFF',
+    icon: 'weather-snowy',
+  },
+  snowy_rainy_night: {
+    color: '#FFF',
+    icon: 'weather-snowy-rainy',
+  },
 };
