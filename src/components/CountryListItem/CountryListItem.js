@@ -1,9 +1,9 @@
-import {Image, Text, View} from 'react-native';
+import {Image, Text, View, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/dist/MaterialCommunityIcons';
 import textStyles from '../../utils/GlobalStyles/textStyles';
 import styles from './styles';
 
-export default function CountryListItem({item}) {
+export default function CountryListItem({item, onAdd}) {
   return (
     <>
       <View style={styles.container}>
@@ -19,9 +19,16 @@ export default function CountryListItem({item}) {
             {`${item.name} - ${item.country_code}`}
           </Text>
         </View>
-        <View>
+        <TouchableOpacity
+          onPress={() =>
+            onAdd(
+              `${item.name} - ${item.country_code}`,
+              item.latitude,
+              item.longitude,
+            )
+          }>
           <Icon name="plus-circle-outline" size={30} color="#88c0d0" />
-        </View>
+        </TouchableOpacity>
       </View>
     </>
   );

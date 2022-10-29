@@ -1,6 +1,13 @@
 import Home from './src/screens/Home';
+import {LocationRealmContext} from './src/models';
 import Search from './src/screens/Search';
 
 export default function App() {
-  return <Search />;
+  const {RealmProvider} = LocationRealmContext;
+
+  return (
+    <RealmProvider>
+      <Home />
+    </RealmProvider>
+  );
 }

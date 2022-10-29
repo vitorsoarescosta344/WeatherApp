@@ -1,14 +1,20 @@
-import {useEffect, useState} from 'react';
+import {useCallback, useEffect, useState} from 'react';
 import {Dimensions, FlatList, ScrollView, TextInput, View} from 'react-native';
 import CountryListItem from '../../components/CountryListItem';
 import WeatherCityListItem from '../../components/WeatherCityListItem';
 import Container from '../../layout/Container';
 import textStyles from '../../utils/GlobalStyles/textStyles';
 import {dataSearch} from '../../utils/mockdata';
+import {Locations} from '../../models/Locations';
+import {LocationRealmContext} from '../../models';
+
+const {useQuery, useRealm} = LocationRealmContext;
 
 export default function Search({}) {
   const [data, setData] = useState([]);
   const [searchText, setSearchText] = useState('');
+
+  const realm = useRealm();
 
   async function SearchHandler() {
     const response = await fetch(
@@ -23,6 +29,15 @@ export default function Search({}) {
       setData([]);
     }
   }
+
+  const handleAddLocation = useCallback(
+    (name, lat, long) => {
+      realm.write(() => {
+        realm.create('Locations', Locations.generate(name, lat, long));
+      });
+    },
+    [realm],
+  );
 
   useEffect(() => {
     SearchHandler();
@@ -51,13 +66,25 @@ export default function Search({}) {
           {data.length === 0 ? (
             <>
               {dataSearch.map((item, index) => {
-                return <CountryListItem item={item} />;
+                return (
+                  <CountryListItem
+                    item={item}
+                    onAdd={handleAddLocation}
+                    key={index}
+                  />
+                );
               })}
             </>
           ) : (
             <>
               {data.map((item, index) => {
-                return <CountryListItem item={item} />;
+                return (
+                  <CountryListItem
+                    item={item}
+                    onAdd={handleAddLocation}
+                    key={index}
+                  />
+                );
               })}
             </>
           )}
