@@ -12,7 +12,7 @@ export default function WeatherCityListItem({item}) {
 
   async function SearchHandler() {
     const response = await fetch(
-      `https://api.open-meteo.com/v1/forecast?latitude=${item.lat}&longitude=${item.long}&hourly=temperature_2m,weathercode&daily=weathercode&timezone=America%2FSao_Paulo`,
+      `https://api.open-meteo.com/v1/forecast?latitude=${item.lat}&longitude=${item.long}&hourly=temperature_2m,weathercode&daily=weathercode&timezone=auto`,
     );
 
     const resJson = await response.json();
